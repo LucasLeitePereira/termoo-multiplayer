@@ -81,6 +81,32 @@ Para parar:
 docker compose down
 ```
 
+## Dockerfile raiz (imagem unica para deploy)
+
+Este repositorio possui um Dockerfile principal em [Dockerfile](Dockerfile) para subir client e server no mesmo container.
+
+Build:
+
+```bash
+docker build -t termoo-multiplayer .
+```
+
+Run:
+
+```bash
+docker run --rm -p 3000:3000 termoo-multiplayer
+```
+
+Acessos:
+
+- App + WebSocket: http://localhost:3000
+- Health: http://localhost:3000/health
+
+No Render (Web Service com Docker):
+
+- Dockerfile Path: `Dockerfile`
+- Docker Build Context Directory: `.`
+
 ## Desenvolvimento local sem Docker
 
 ### Server
@@ -104,7 +130,8 @@ npm run dev
 Client:
 
 - `VITE_WS_URL` (opcional)
-  - se nao definido, usa automaticamente `ws://<hostname>:3000`
+  - se nao definido, usa automaticamente mesma origem da pagina
+  - em localhost com portas comuns de front (5173, 8080, 4173), usa fallback para porta 3000
 
 Server:
 
