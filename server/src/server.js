@@ -1,5 +1,5 @@
-import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
+import Fastify from "fastify";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,6 +27,7 @@ if (existsSync(CLIENT_DIST_DIR)) {
   await app.register(fastifyStatic, {
     root: CLIENT_DIST_DIR,
     prefix: "/",
+    wildcard: false,
   });
 
   app.get("/*", async (request, reply) => {
